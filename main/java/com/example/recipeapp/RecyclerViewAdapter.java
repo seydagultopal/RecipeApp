@@ -35,20 +35,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyHolder myHolder, final int i) {
+    public void onBindViewHolder(@NonNull final MyHolder myHolder,final int i) {
+        myHolder.recipeTitle.setText(mData.get(myHolder.getAdapterPosition()).getRecipeName());
 
-        myHolder.recipeTitle.setText(mData.get(i).getRecipeName());
-        myHolder.img_recipe_thumbnail.setImageResource(mData.get(i).getThumbnail());
+        myHolder.img_recipe_thumbnail.setImageResource(mData.get(myHolder.getAdapterPosition()).getThumbnail());
         myHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,RecipeActivity.class);
 
-                intent.putExtra("RecipeName",mData.get(i).getRecipeName());
-                intent.putExtra("RecipeIngredients",mData.get(i).getRecipeIngredients());
-                intent.putExtra("RecipeMethodTitle",mData.get(i).getRecipeMethodTitle());
-                intent.putExtra("Recipe",mData.get(i).getRecipe());
-                intent.putExtra("Thumbnail",mData.get(i).getThumbnail());
+                intent.putExtra("RecipeName",mData.get(myHolder.getAdapterPosition()).getRecipeName());
+                intent.putExtra("RecipeIngredients",mData.get(myHolder.getAdapterPosition()).getRecipeIngredients());
+                intent.putExtra("RecipeMethodTitle",mData.get(myHolder.getAdapterPosition()).getRecipeMethodTitle());
+                intent.putExtra("Recipe",mData.get(myHolder.getAdapterPosition()).getRecipe());
+                intent.putExtra("Thumbnail",mData.get(myHolder.getAdapterPosition()).getThumbnail());
 
                 mContext.startActivity(intent);
             }
@@ -69,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
-            recipeTitle = (TextView)itemView.findViewById(R.id.text_recipe);
+            recipeTitle = (TextView)itemView.findViewById(R.id.recipe_text);
             img_recipe_thumbnail = (ImageView) itemView.findViewById(R.id.recipe_img_id);
             cardView = (CardView) itemView.findViewById(R.id.cardview_id);
         }
